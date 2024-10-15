@@ -6,14 +6,23 @@ FUNCTIONS
 1. Write a user-defined function to calculate age using DOB.
 
 DELIMITER $$
+
 CREATE FUNCTION calculate_age(dob DATE)
+
 RETURNS INT
+
 DETERMINISTIC
+
 BEGIN
-    DECLARE age INT;
-    SET age = TIMESTAMPDIFF(YEAR, dob, CURDATE());
-    RETURN age;
+
+DECLARE age INT;
+
+SET age = TIMESTAMPDIFF(YEAR, dob, CURDATE());
+
+RETURN age;
+
 END$$
+
 DELIMITER ;
 
 2.Write a select query to fetch the Age of all persons using the function that has been created.
@@ -32,15 +41,13 @@ CREATE PROCEDURE Add_Row_to_Worker(IN FirstName_pro CHAR(25),IN LastName_pro  CH
 
 BEGIN
 
-    INSERT INTO Worker(FirstName, LastName, Salary, JoiningDate, Department)
-    VALUES
-    (FirstName_pro,LastName_pro,Salary_pro,JoiningDate_pro,Department_pro );
+INSERT INTO Worker(FirstName, LastName, Salary, JoiningDate, Department)VALUES(FirstName_pro,LastName_pro,Salary_pro,JoiningDate_pro,Department_pro );
     
 END $$
 
 DELIMITER ;
 
-         CALL Add_Row_to_Worker('Ann', 'jenifer', 77000, '2022-09-11 08:30:00', 'IT');
+CALL Add_Row_to_Worker('Ann', 'jenifer', 77000, '2022-09-11 08:30:00', 'IT');
          
 SELECT * FROM WORKER;
 
@@ -54,7 +61,7 @@ CREATE PROCEDURE Get_Worker_Salary(IN Worker_Id_pro INT,OUT Salary_pro INT)
 
 BEGIN
 
-    SELECT Salary INTO Salary_pro FROM Worker WHERE Worker_Id =   Worker_Id_pro;
+SELECT Salary INTO Salary_pro FROM Worker WHERE Worker_Id =   Worker_Id_pro;
     
 END $$
 
@@ -76,7 +83,7 @@ CREATE PROCEDURE Update_Department_of_worker(IN Worker_Id_pro INT,IN Department_
 
 BEGIN
 
-    UPDATE Worker SET Department = Department_pro WHERE Worker_Id = Worker_Id_pro;
+UPDATE Worker SET Department = Department_pro WHERE Worker_Id = Worker_Id_pro;
     
 END $$
 
@@ -96,7 +103,7 @@ CREATE PROCEDURE Worker_CountBy_Department(IN p_Department CHAR(25),OUT p_Worker
 
 BEGIN
 
-    SELECT COUNT(*) INTO p_WorkerCount FROM Worker WHERE Department = p_Department;
+SELECT COUNT(*) INTO p_WorkerCount FROM Worker WHERE Department = p_Department;
     
 END $$
 
@@ -118,7 +125,7 @@ CREATE PROCEDURE Average_SalaryBy_Department(IN p_Department CHAR(25),OUT p_AvgS
 
 BEGIN
 
-    SELECT AVG(Salary) INTO p_AvgSalary FROM Worker WHERE Department = p_Department;
+SELECT AVG(Salary) INTO p_AvgSalary FROM Worker WHERE Department = p_Department;
     
 END $$
 
